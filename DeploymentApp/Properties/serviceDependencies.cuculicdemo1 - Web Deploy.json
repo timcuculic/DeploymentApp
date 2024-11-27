@@ -3,7 +3,7 @@
     "mssql1": {
       "serviceConnectorResourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('serviceConnectorResourceGroupName')]/providers/Microsoft.Web/sites/cuculicdemo1/providers/Microsoft.ServiceLinker/linkers/ConnectionStringsProjectContext_45798BAFBB",
       "secretStore": "AzureAppSettings",
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/deploymentdbsrvr1/databases/deploymentdb",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/deploymentdbsrvr1/databases/DeploymentApp_db",
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:ProjectContext"
     }
