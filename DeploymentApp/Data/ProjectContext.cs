@@ -21,7 +21,7 @@ namespace DeploymentApp.Data
                 {
                     throw new ArgumentNullException("Null ProjectContext");
                 }
-                if (context.ExpenseTypes.Any())
+                if (!context.ExpenseTypes.Any())
                 {
                     context.ExpenseTypes.AddRange(
                         new ExpenseType
