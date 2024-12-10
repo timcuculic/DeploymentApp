@@ -61,8 +61,6 @@ jobs:
     steps:
       - name: Download artifact from build jobbbbbbbb
         uses: actions/download-artifact@v4
-        with:
-          name: .net-app
       
       - name: Login to Azureeeeeeeeeeeeeeeeeeeeeeeexxxxxxxxxxx
         uses: azure/login@v2
