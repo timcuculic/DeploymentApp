@@ -110,5 +110,5 @@ jobs:
           connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
           # Path to the file used for this action. Supported file types are .sql, .dacpac, or .sqlproj
           # File must be a .sql, .dacpac, or .sqlproj file.
-          path: ./dll-updates/sql/sql-script.sql
+          path: ./dll-updates/sql-script.sql
           
