@@ -52,10 +52,12 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: dll-updates
-          # A single file, filepath or wildcard pattern that describes what to upload
+          # Path is the file or files you want to package up.
+          # It could be a file path to a single file, an entire directory, or a wildcard pattern that describes what to upload
           # in the example below, we are uploading a single file, which in this case is the published app that we published in the step above
           # Upload all files in the 'myapp' folder, and name that collection of stuff '.net-app'
           path: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
+          if-no-files-found: error
 
   deploy:
     runs-on: windows-latest
