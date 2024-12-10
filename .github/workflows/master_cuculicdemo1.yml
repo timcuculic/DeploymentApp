@@ -33,7 +33,12 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
+          # name = the name of the artifact to upload. An 'artifact' can be a single file or collection of files. 
+          # Optional. Default is 'artifact'
           name: .net-app
+          # A single file, filepath or wildcard pattern that describes what to upload
+          # in the example below, we are uploading everything in the myapp directory, which in this case is the published app that we published in the step above
+          # Upload all files in the 'myapp' folder, and name that collection of stuff '.net-app'
           path: ${{env.DOTNET_ROOT}}/myapp
 
       - name: Install EntityFrameworkCore Tools
@@ -42,11 +47,14 @@ jobs:
             dotnet tool install dotnet-ef
 
       - name: Generate EF Core Migration Script
-        run: dotnet ef migrations script --no-build --idempotent --configuration Release --output C:\Users\runneradmin\AppData\Local\Microsoft\dotnet/sql/sql-script.sql --context DeploymentApp.Data.ProjectContext --project ${{ github.workspace }}/DeploymentApp/DeploymentApp.csproj
+        run: dotnet ef migrations script --no-build --idempotent --configuration Release --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context DeploymentApp.Data.ProjectContext --project ${{ github.workspace }}/DeploymentApp/DeploymentApp.csproj
 
       - uses: actions/upload-artifact@v4
         with:
           name: dll-updates
+          # A single file, filepath or wildcard pattern that describes what to upload
+          # in the example below, we are uploading a single file, which in this case is the published app that we published in the step above
+          # Upload all files in the 'myapp' folder, and name that collection of stuff '.net-app'
           path: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
 
   deploy:
@@ -83,5 +91,5 @@ jobs:
           # The connection string, including authentication information, for the Azure SQL Server database.
           connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
           # Path to the file used for this action. Supported file types are .sql, .dacpac, or .sqlproj
-          path: 'sql-script.sql'
+          path: ./dll-updates/sql/sql-script.sql
           
