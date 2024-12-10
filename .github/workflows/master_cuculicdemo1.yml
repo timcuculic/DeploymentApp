@@ -86,10 +86,10 @@ jobs:
           package: ./.net-app/
 
       - name: Azure SQL Deploy - PROD
-        uses: Azure/sql-action@v1
+        uses: Azure/sql-action@v2.3
         with:
           # The connection string, including authentication information, for the Azure SQL Server database.
           connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
           # Path to the file used for this action. Supported file types are .sql, .dacpac, or .sqlproj
-          path: ./dll-updates/sql/sql-script.sql
+          path: './dll-updates/sql/sql-script.sql'
           
