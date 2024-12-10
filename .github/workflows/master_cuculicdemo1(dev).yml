@@ -79,7 +79,7 @@ jobs:
           slot-name: 'dev'
           package: ./.net-app/
 
-      - name: Azure SQL Deploy
+      - name: Azure SQL Deploy IN DEEEEEEEEEEEEEV
         uses: Azure/sql-action@v1
         with:
           # The connection string, including authentication information, for the Azure SQL Server database.
