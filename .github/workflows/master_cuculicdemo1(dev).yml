@@ -20,6 +20,9 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.0.x'
+       
+      - name: Restore Dependencies
+        run: dotnet restore
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
@@ -32,6 +35,19 @@ jobs:
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/myapp
+
+      - name: Install EntityFrameworkCore Tools
+        run: |
+            dotnet new tool-manifest
+            dotnet tool install dotnet-ef
+
+      - name: Generate EF Core Migration Script
+        run: dotnet ef migrations script --no-build --idempotent --configuration Release --output ${{env.DOTNET_ROOT}}/sql/sql-script.sql --context DeploymentApp.Data.ProjectContext  --project ${{ github.workspace }}/DeploymentApp/DeploymentApp.csproj
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dll-updates
+          path: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
 
   deploy:
     runs-on: windows-latest
@@ -51,9 +67,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0FC68D79C4C349229F774337323D38B2 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B2594B5689E64BD8BA3CE3A927A3A1BB }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A92208BD8EAE4C0080EED56A1BF0FDCC }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EDD0E1C2EDFB4853A5C16DEBA44124A6 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BE1D17F935CE4306B27E80784CFBBEBA }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A3D08ED714F84FFDBE68E2E82541BCF9 }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
@@ -61,5 +77,14 @@ jobs:
         with:
           app-name: 'cuculicdemo1'
           slot-name: 'dev'
-          package: .
+          package: ./.net-app/
+
+      - name: Azure SQL Deploy
+        uses: Azure/sql-action@v1
+        with:
+          # The connection string, including authentication information, for the Azure SQL Server database.
+          connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
+          # Path to the file used for this action. Supported file types are .sql, .dacpac, or .sqlproj
+          path: ./ddl-updates/sql-script.sql
+          
           
