@@ -9,10 +9,16 @@ on:
       - master
   workflow_dispatch:
 
-jobs:
-  build:
-    runs-on: windows-latest
+env:
+  DAY_OF_WEEK: Monday
 
+jobs:
+  OkLetsBuildThisBEotch:
+    runs-on: windows-latest
+    
+    env:
+      Greeting: Hello
+      
     steps:
       - uses: actions/checkout@v4
 
@@ -21,18 +27,19 @@ jobs:
         with:
           dotnet-version: '8.0.x'
 
-      - name: Restore Dependencies
+      - name: Awwwe yeahhhh! Restorin sum Dependencies...
         run: dotnet restore
 
-      - name: Build with dotnet
+      - name: Ok, let's build this bad boy with dotnet
         run: dotnet build --configuration Release
 
       - name: trying something new here    
         run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
-
+        env:
+          First_Name: Mona
 
       # Publish all the files needed to run the app to a folder.
-      - name: dotnet publish
+      - name: Next up, good old dotnet publish. We're publishing to the root/myapp
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
 
