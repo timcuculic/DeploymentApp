@@ -77,7 +77,7 @@ jobs:
           slot-name: 'Production'
           package: ./.net-app/
 
-      - name: Azure SQL Deploy
+      - name: Azure SQL Deploy in PROD
         uses: Azure/sql-action@v1
         with:
           # The connection string, including authentication information, for the Azure SQL Server database.
