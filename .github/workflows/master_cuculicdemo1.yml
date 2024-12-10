@@ -39,6 +39,7 @@ jobs:
           First_Name: Mona
 
       # Publish all the files needed to run the app to a folder.
+      # The root is C:\Program Files\dotnet
       - name: Next up, good old dotnet publish. We're publishing to the root/myapp
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
@@ -62,7 +63,7 @@ jobs:
             dotnet tool install dotnet-ef
 
       - name: Generate EF Core Migration Script
-        run: dotnet ef migrations script --no-build --idempotent --configuration Release --output C:\Users\runneradmin\AppData\Local\Microsoft\dotnet/sql/sql-script.sql --context DeploymentApp.Data.ProjectContext --project ${{ github.workspace }}/DeploymentApp/DeploymentApp.csproj
+        run: dotnet ef migrations script --no-build --idempotent --configuration Release --output C:\Program Files\dotnet/sql/sql-script.sql --context DeploymentApp.Data.ProjectContext --project ${{ github.workspace }}/DeploymentApp/DeploymentApp.csproj
 
       - uses: actions/upload-artifact@v4
         with:
