@@ -62,7 +62,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
       
-      - name: Login to Azure
+      - name: Login to Azureeeeeeeeeeeeeeeeeeeeeeeexxxxxxxxxxx
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EDD0E1C2EDFB4853A5C16DEBA44124A6 }}
