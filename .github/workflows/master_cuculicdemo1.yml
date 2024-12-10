@@ -59,17 +59,17 @@ jobs:
       id-token: write #This is required for requesting the JWT
 
     steps:
-      - name: Download artifact from build jobbbbbbbb
+      - name: Download artifact from build job - PROD
         uses: actions/download-artifact@v4
       
-      - name: Login to Azureeeeeeeeeeeeeeeeeeeeeeeexxxxxxxxxxx
+      - name: Login to Azure - PROD
         uses: azure/login@v2
         with:
           client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_EDD0E1C2EDFB4853A5C16DEBA44124A6 }}
           tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BE1D17F935CE4306B27E80784CFBBEBA }}
           subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A3D08ED714F84FFDBE68E2E82541BCF9 }}
 
-      - name: Deploy to Azure Web App
+      - name: Deploy to Azure Web App - PROD
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
         with:
@@ -77,11 +77,11 @@ jobs:
           slot-name: 'Production'
           package: ./.net-app/
 
-      - name: Azure SQL Deploy in PROD
+      - name: Azure SQL Deploy - PROD
         uses: Azure/sql-action@v1
         with:
           # The connection string, including authentication information, for the Azure SQL Server database.
           connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
           # Path to the file used for this action. Supported file types are .sql, .dacpac, or .sqlproj
-          path: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
+          path: 'sql-script.sql'
           
