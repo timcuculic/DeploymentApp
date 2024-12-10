@@ -27,18 +27,26 @@ jobs:
       - name: Build with dotnet
         run: dotnet build --configuration Release
 
+      - name: trying something new here    
+        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+
+
+      # Publish all the files needed to run the app to a folder.
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
-      - name: Upload artifact for deployment job
+
+      # Now let's gather up those files and assign them to a vaiable, then upload them using the upload-artifact method.
+      - name: Upload artifact for deployment job. This is just the website part. Not the db.
         uses: actions/upload-artifact@v4
         with:
-          # name = the name of the artifact to upload. An 'artifact' can be a single file or collection of files. 
+          # name = Variable name. the name of the artifact to upload. An 'artifact' can be a single file or collection of files. 
+          # this is just a variable name. It is unimportant. Call it whatever you want.
           # Optional. Default is 'artifact'
-          name: .net-app
+          name: AllMyDeploymentFiles
           # A single file, filepath or wildcard pattern that describes what to upload
           # in the example below, we are uploading everything in the myapp directory, which in this case is the published app that we published in the step above
-          # Upload all files in the 'myapp' folder, and name that collection of stuff '.net-app'
+          # Upload all files in the 'myapp' folder, and name that collection of stuff 'AllMyDeploymentFiles'
           path: ${{env.DOTNET_ROOT}}/myapp
 
       - name: Install EntityFrameworkCore Tools
@@ -55,7 +63,7 @@ jobs:
           # Path is the file or files you want to package up.
           # It could be a file path to a single file, an entire directory, or a wildcard pattern that describes what to upload
           # in the example below, we are uploading a single file, which in this case is the published app that we published in the step above
-          # Upload all files in the 'myapp' folder, and name that collection of stuff '.net-app'
+          # Upload all files in the 'myapp' folder, and name that collection of stuff 'AllMyDeploymentFiles'
           path: ${{env.DOTNET_ROOT}}/sql/sql-script.sql
           if-no-files-found: error
 
@@ -85,7 +93,7 @@ jobs:
         with:
           app-name: 'cuculicdemo1'
           slot-name: 'Production'
-          package: ./.net-app/
+          package: ./AllMyDeploymentFiles/
 
       - name: Azure SQL Deploy - PROD
         uses: Azure/sql-action@v2.3
