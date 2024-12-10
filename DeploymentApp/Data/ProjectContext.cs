@@ -9,6 +9,8 @@ namespace DeploymentApp.Data
 
         public DbSet<DeploymentApp.Models.Expense> Expenses { get; set; }
         public DbSet<DeploymentApp.Models.ExpenseType> ExpenseTypes { get; set; }
+
+        public DbSet<Person> Persons { get; set; }
     }
 
     public static class SeedData
