@@ -34,7 +34,7 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: trying something new here    
-        run: echo "$Greeting $First_Name. Today is $DAY_OF_WEEK!"
+        run: echo $Greeting
         env:
           First_Name: Mona
 
@@ -109,5 +109,5 @@ jobs:
           # The connection string, including authentication information, for the Azure SQL Server database.
           connection-string: ${{ secrets.SQL_CONNECTION_STRING }}
           # Path to the file used for this action. Supported file types are .sql, .dacpac, or .sqlproj
-          path: './dll-updates/sql/sql-script.sql'
+          path: ./dll-updates/
           
