@@ -98,7 +98,6 @@ namespace DeploymentApp.Data
                             ExpenseTypeId = mealType.ExpenseTypeId,
                             UserId = userId,
                             DateIncurred = lastMonthLastDay.AddDays(randomInt.Next(numDaysLastMonth - 2, -1)),
-                            DateCreated = DateTime.Now,
                         },
                         new Expense
                         {
@@ -108,7 +107,6 @@ namespace DeploymentApp.Data
                             ExpenseTypeId = mealType.ExpenseTypeId,
                             UserId = userId,
                             DateIncurred = lastMonthLastDay.AddDays(randomInt.Next(numDaysLastMonth - 2, -1)),
-                            DateCreated = DateTime.Now,
                         },
                         new Expense
                         {
@@ -118,7 +116,6 @@ namespace DeploymentApp.Data
                             ExpenseTypeId = mealType.ExpenseTypeId,
                             UserId = userId,
                             DateIncurred = lastMonthLastDay.AddDays(randomInt.Next(numDaysLastMonth - 2, -1)),
-                            DateCreated = DateTime.Now,
                         }
                      );
 

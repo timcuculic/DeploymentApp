@@ -32,7 +32,5 @@ namespace DeploymentApp.Models
 
         // User Id
         public int UserId { get; set; }
-
-        public DateTime DateCreated { get; set; }
     }
 }
