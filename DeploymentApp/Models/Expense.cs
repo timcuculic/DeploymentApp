@@ -6,17 +6,17 @@ namespace DeploymentApp.Models
     public class Expense
     {
         public int Id { get; set; }
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Display(Name = "Date")]
         [DataType(DataType.Date)]
-        public DateTime DateIncurred { get; set; }
+        public DateTime? DateIncurred { get; set; }
 
-        public string Location { get; set; }
+        public string? Location { get; set; }
 
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,2)")]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         // Expense Type Id (forign key)
         [Display(Name = "Expense Type")]
@@ -24,13 +24,13 @@ namespace DeploymentApp.Models
 
 
 
-        public int ExpenseTypeId { get; set; }
+        public int? ExpenseTypeId { get; set; }
         public ExpenseType ExpenseType { get; set; }
 
 
 
 
         // User Id
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
     }
 }
