@@ -11,6 +11,7 @@ namespace DeploymentApp.Data
         public DbSet<DeploymentApp.Models.ExpenseType> ExpenseTypes { get; set; }
 
         public DbSet<Person> Persons { get; set; }
+        public DbSet<DeploymentApp.Models.Car> Car { get; set; } = default!;
     }
 
     public static class SeedData
