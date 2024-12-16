@@ -87,6 +87,10 @@ jobs:
     steps:
       - name: Download artifact from build job - PROD
         uses: actions/download-artifact@v4
+        # This downloads all the artifacts and puts them in their own folders, by the name of the artifact
+        # If you wanted to only the dot net files we created above, you could do something like this:
+        # -with:
+        #    name: myapp
       
       - name: Login to Azure - PROD
         uses: azure/login@v2
